@@ -378,7 +378,56 @@
     </div>
 
     <script>
-      document.getElementById('unlockBtn').addEventListener('click', function() {
+      // كود الكحت (Scratch) تم إضافته هنا عشان يشتغل على كل الصور
+      window.addEventListener('load', function() {
+        document.querySelectorAll('.scratch-canvas').forEach(canvas => {
+          const ctx = canvas.getContext('2d');
+          const container = canvas.parentElement;
+
+          // ضبط الأبعاد بناءً على الحاوية
+          canvas.width = container.offsetWidth;
+          canvas.height = container.offsetHeight;
+
+          // رسم الطبقة الفضية
+          ctx.fillStyle = '#C0C0C0'; 
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          // إضافة نص فوق الطبقة الفضية
+          ctx.font = '24px "Cormorant Garamond", serif';
+          ctx.fillStyle = '#ffffff';
+          ctx.textAlign = 'center';
+          ctx.fillText('Scratch Me ✨', canvas.width / 2, canvas.height / 2);
+
+          let isDrawing = false;
+
+          function scratch(e) {
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            
+            const x = clientX - rect.left;
+            const y = clientY - rect.top;
+            
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.beginPath();
+            ctx.arc(x, y, 25, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          canvas.addEventListener('mousedown', () => isDrawing = true);
+          canvas.addEventListener('mouseup', () => isDrawing = false);
+          canvas.addEventListener('mouseleave', () => isDrawing = false);
+          canvas.addEventListener('mousemove', scratch);
+          
+          canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); });
+          canvas.addEventListener('touchend', () => isDrawing = false);
+          canvas.addEventListener('touchmove', (e) => { e.preventDefault(); scratch(e); }, { passive: false });
+        });
+      });
+
+      // الكود بتاعك الأساسي زي ما هو بالظبط
+      document.getElementById('unlockBtn')?.addEventListener('click', function() {
         const input = document.getElementById('dateInput').value.toLowerCase();
         if (input === 'koky') { launchConfetti(); document.getElementById('passwordGate').style.opacity = '0'; document.getElementById('passwordGate').style.transition = 'opacity 1s'; setTimeout(() => { document.getElementById('passwordGate').classList.add('hidden'); document.getElementById('mainContent').classList.remove('hidden'); startParticles(); createRomanticRain(); }, 1000); } else { document.getElementById('errorMsg').classList.remove('hidden'); }
       });
@@ -386,8 +435,8 @@
       function launchConfetti() { const hearts = ['♥', '💖', '💕', '💝', '💗']; for (let i = 0; i < 100; i++) { const confetti = document.createElement('div'); confetti.className = 'confetti'; confetti.innerHTML = hearts[Math.floor(Math.random() * hearts.length)]; confetti.style.left = Math.random() * 100 + 'vw'; confetti.style.color = ['#FF69B4', '#FFC0CB', '#E75480', '#DC143C'][Math.floor(Math.random() * 4)]; confetti.style.animationDelay = Math.random() * 2 + 's'; confetti.style.fontSize = (Math.random() * 10 + 15) + 'px'; document.body.appendChild(confetti); setTimeout(() => confetti.remove(), 3000); } }
 
       function createRomanticRain() {
-        setInterval(() => { for (let i = 0; i < 1; i++) { const heart = document.createElement('div'); heart.className = 'heart-particle'; heart.innerHTML = ['♥', '💖', '💕'][Math.floor(Math.random() * 3)]; heart.style.left = Math.random() * 100 + 'vw'; heart.style.animationDuration = (Math.random() * 15 + 20) + 's'; heart.style.fontSize = (Math.random() * 10 + 12) + 'px'; document.getElementById('particlesContainer').appendChild(heart); setTimeout(() => heart.remove(), 30000); } }, 1000);
-        setInterval(() => { for (let i = 0; i < 1; i++) { const petal = document.createElement('div'); petal.className = 'rose-petal'; petal.style.left = Math.random() * 100 + 'vw'; petal.style.animationDuration = (Math.random() * 20 + 25) + 's'; petal.style.opacity = (Math.random() * 0.3 + 0.3); document.getElementById('particlesContainer').appendChild(petal); setTimeout(() => petal.remove(), 35000); } }, 1500);
+        setInterval(() => { for (let i = 0; i < 1; i++) { const heart = document.createElement('div'); heart.className = 'heart-particle'; heart.innerHTML = ['♥', '💖', '💕'][Math.floor(Math.random() * 3)]; heart.style.left = Math.random() * 100 + 'vw'; heart.style.animationDuration = (Math.random() * 15 + 20) + 's'; heart.style.fontSize = (Math.random() * 10 + 12) + 'px'; document.getElementById('particlesContainer')?.appendChild(heart); setTimeout(() => heart.remove(), 30000); } }, 1000);
+        setInterval(() => { for (let i = 0; i < 1; i++) { const petal = document.createElement('div'); petal.className = 'rose-petal'; petal.style.left = Math.random() * 100 + 'vw'; petal.style.animationDuration = (Math.random() * 20 + 25) + 's'; petal.style.opacity = (Math.random() * 0.3 + 0.3); document.getElementById('particlesContainer')?.appendChild(petal); setTimeout(() => petal.remove(), 35000); } }, 1500);
       }
       function startParticles() { createRomanticRain(); }
 
@@ -395,7 +444,7 @@
       document.addEventListener('touchmove', function(e) { burstOfHearts(e.touches[0].clientX, e.touches[0].clientY); });
       document.addEventListener('mousemove', function(e) { if (Math.random() > 0.98 && document.getElementById('particlesContainer')) { burstOfHearts(e.clientX, e.clientY); } });
 
-      function burstOfHearts(x, y) { const hearts = ['♥', '💖', '💕', '💗']; for (let i = 0; i < 5; i++) { const heart = document.createElement('div'); heart.className = 'heart-particle'; heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)]; heart.style.left = x + (Math.random() - 0.5) * 80 + 'px'; heart.style.top = y + 'px'; heart.style.animationDuration = (Math.random() * 3 + 2) + 's'; heart.style.fontSize = (Math.random() * 10 + 12) + 'px'; heart.style.color = ['#FF69B4', '#E75480', '#DC143C'][Math.floor(Math.random() * 3)]; document.getElementById('particlesContainer').appendChild(heart); setTimeout(() => heart.remove(), 5000); } }
+      function burstOfHearts(x, y) { const hearts = ['♥', '💖', '💕', '💗']; for (let i = 0; i < 5; i++) { const heart = document.createElement('div'); heart.className = 'heart-particle'; heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)]; heart.style.left = x + (Math.random() - 0.5) * 80 + 'px'; heart.style.top = y + 'px'; heart.style.animationDuration = (Math.random() * 3 + 2) + 's'; heart.style.fontSize = (Math.random() * 10 + 12) + 'px'; heart.style.color = ['#FF69B4', '#E75480', '#DC143C'][Math.floor(Math.random() * 3)]; document.getElementById('particlesContainer')?.appendChild(heart); setTimeout(() => heart.remove(), 5000); } }
 
       const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); entry.target.classList.add('romantic-shadow'); } }); }, { threshold: 0.1 });
       document.querySelectorAll('.slide-in').forEach(el => observer.observe(el));
@@ -425,7 +474,7 @@
       document.getElementById('sendDestination').addEventListener('click', function() { document.getElementById('destinationModal').classList.remove('hidden'); document.getElementById('destinationModal').classList.add('flex'); launchConfettiHearts(); setTimeout(() => { document.querySelector('#destinationModal > div').style.transform = 'scale(1)'; }, 10); });
       document.getElementById('destinationModal').addEventListener('click', function(e) { if (e.target === this) { this.classList.add('hidden'); this.classList.remove('flex'); } });
 
-      function launchConfettiHearts() { const hearts = ['♥', '💖', '💕', '💗']; for (let i = 0; i < 40; i++) { setTimeout(() => { const heart = document.createElement('div'); heart.className = 'heart-particle'; heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)]; heart.style.left = Math.random() * 100 + 'vw'; heart.style.animationDuration = (Math.random() * 3 + 2) + 's'; heart.style.fontSize = (Math.random() * 10 + 15) + 'px'; heart.style.color = ['#FF69B4', '#E75480', '#DC143C'][Math.floor(Math.random() * 3)]; document.getElementById('particlesContainer').appendChild(heart); setTimeout(() => heart.remove(), 6000); }, i * 50); } }
+      function launchConfettiHearts() { const hearts = ['♥', '💖', '💕', '💗']; for (let i = 0; i < 40; i++) { setTimeout(() => { const heart = document.createElement('div'); heart.className = 'heart-particle'; heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)]; heart.style.left = Math.random() * 100 + 'vw'; heart.style.animationDuration = (Math.random() * 3 + 2) + 's'; heart.style.fontSize = (Math.random() * 10 + 15) + 'px'; heart.style.color = ['#FF69B4', '#E75480', '#DC143C'][Math.floor(Math.random() * 3)]; document.getElementById('particlesContainer')?.appendChild(heart); setTimeout(() => heart.remove(), 6000); }, i * 50); } }
 
       document.getElementById('giftBox').addEventListener('click', () => { document.getElementById('finalLetter').classList.remove('hidden'); document.getElementById('finalLetter').classList.add('flex'); launchConfettiHearts(); setTimeout(() => { document.getElementById('roseAnimation').classList.remove('hidden'); }, 500); setTimeout(() => { document.getElementById('letterText').classList.remove('hidden'); document.querySelector('#finalLetter > div').style.transform = 'scale(1)'; }, 1000); });
 
