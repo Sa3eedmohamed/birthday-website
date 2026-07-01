@@ -378,15 +378,15 @@
     </div>
 
     <script>
-      // كود الكحت (Scratch) تم إضافته هنا عشان يشتغل على كل الصور
-      window.addEventListener('load', function() {
+      // دالة تفعيل الكحت (عشان تترسم بحجمها الحقيقي بعد ما الصفحة تفتح)
+      function initScratchCards() {
         document.querySelectorAll('.scratch-canvas').forEach(canvas => {
           const ctx = canvas.getContext('2d');
           const container = canvas.parentElement;
 
-          // ضبط الأبعاد بناءً على الحاوية
-          canvas.width = container.offsetWidth;
-          canvas.height = container.offsetHeight;
+          // نديها أبعاد بديلة لو المتصفح قراها صفر
+          canvas.width = container.offsetWidth || 300;
+          canvas.height = container.offsetHeight || 340;
 
           // رسم الطبقة الفضية
           ctx.fillStyle = '#C0C0C0'; 
@@ -403,15 +403,20 @@
           function scratch(e) {
             if (!isDrawing) return;
             const rect = canvas.getBoundingClientRect();
+            
+            // حساب الأبعاد بدقة عشان لو في سكيل (scale)
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+
             const clientX = e.clientX || (e.touches && e.touches[0].clientX);
             const clientY = e.clientY || (e.touches && e.touches[0].clientY);
             
-            const x = clientX - rect.left;
-            const y = clientY - rect.top;
+            const x = (clientX - rect.left) * scaleX;
+            const y = (clientY - rect.top) * scaleY;
             
             ctx.globalCompositeOperation = 'destination-out';
             ctx.beginPath();
-            ctx.arc(x, y, 25, 0, Math.PI * 2);
+            ctx.arc(x, y, 35, 0, Math.PI * 2); // حجم الفرشة
             ctx.fill();
           }
 
@@ -424,12 +429,26 @@
           canvas.addEventListener('touchend', () => isDrawing = false);
           canvas.addEventListener('touchmove', (e) => { e.preventDefault(); scratch(e); }, { passive: false });
         });
-      });
+      }
 
-      // الكود بتاعك الأساسي زي ما هو بالظبط
+      // زرار الباسورد
       document.getElementById('unlockBtn')?.addEventListener('click', function() {
         const input = document.getElementById('dateInput').value.toLowerCase();
-        if (input === 'koky') { launchConfetti(); document.getElementById('passwordGate').style.opacity = '0'; document.getElementById('passwordGate').style.transition = 'opacity 1s'; setTimeout(() => { document.getElementById('passwordGate').classList.add('hidden'); document.getElementById('mainContent').classList.remove('hidden'); startParticles(); createRomanticRain(); }, 1000); } else { document.getElementById('errorMsg').classList.remove('hidden'); }
+        if (input === 'koky') { 
+          launchConfetti(); 
+          document.getElementById('passwordGate').style.opacity = '0'; 
+          document.getElementById('passwordGate').style.transition = 'opacity 1s'; 
+          
+          setTimeout(() => { 
+            document.getElementById('passwordGate').classList.add('hidden'); 
+            document.getElementById('mainContent').classList.remove('hidden'); 
+            startParticles(); 
+            createRomanticRain(); 
+            initScratchCards(); // <--- الدالة دي هي اللي بترسم الكحت دلوقتي بعد ما الصفحة تفتح
+          }, 1000); 
+        } else { 
+          document.getElementById('errorMsg').classList.remove('hidden'); 
+        }
       });
 
       function launchConfetti() { const hearts = ['♥', '💖', '💕', '💝', '💗']; for (let i = 0; i < 100; i++) { const confetti = document.createElement('div'); confetti.className = 'confetti'; confetti.innerHTML = hearts[Math.floor(Math.random() * hearts.length)]; confetti.style.left = Math.random() * 100 + 'vw'; confetti.style.color = ['#FF69B4', '#FFC0CB', '#E75480', '#DC143C'][Math.floor(Math.random() * 4)]; confetti.style.animationDelay = Math.random() * 2 + 's'; confetti.style.fontSize = (Math.random() * 10 + 15) + 'px'; document.body.appendChild(confetti); setTimeout(() => confetti.remove(), 3000); } }
@@ -454,10 +473,9 @@
       
       // توزيع الزوايا العشوائية للبولاروايد
       document.querySelectorAll('.polaroid-card').forEach(card => {
-        const tilt = (Math.random() * 8 - 4).toFixed(2); // زوايا عشوائية واضحة وروشة
+        const tilt = (Math.random() * 8 - 4).toFixed(2);
         card.style.setProperty('--tilt', `${tilt}deg`);
         
-        // تأثير حركي ثلاثي الأبعاد مع حركة الماوس
         card.addEventListener('mousemove', (e) => {
           const rect = card.getBoundingClientRect();
           const x = e.clientX - rect.left - rect.width/2;
