@@ -242,24 +242,85 @@
       </div>
     </section>
 
-    <section class="py-16 px-6">
+   <section class="py-16 px-6">
         <h2 class="text-4xl font-playfair text-white text-center mb-16">Our Beautiful Moments</h2>
-        <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
-          <div class="polaroid-card fade-in-card" onclick="openModal('https://drive.google.com/thumbnail?sz=w1000&id=1LSibvWPXnrm1ez5NOHdj4W6wD996Fg8r')"><img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1LSibvWPXnrm1ez5NOHdj4W6wD996Fg8r" alt="Our moment"></div>
-          <div class="polaroid-card fade-in-card" onclick="openModal('https://drive.google.com/thumbnail?sz=w1000&id=1ZJ-Oa3txN-rCEAhayFPnKUBa-Or-Crly')"><img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1ZJ-Oa3txN-rCEAhayFPnKUBa-Or-Crly" alt="Our moment"></div>
-          <div class="polaroid-card fade-in-card" onclick="openModal('https://drive.google.com/thumbnail?sz=w1000&id=1__SjpqUEFpcKphr0BSB-QI7jOkneTw6L')"><img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1__SjpqUEFpcKphr0BSB-QI7jOkneTw6L" alt="Our moment"></div>
-          <div class="polaroid-card fade-in-card" onclick="openModal('https://drive.google.com/thumbnail?sz=w1000&id=1eEtwPx2ixS_BsZanWq4M6zkG_fYBHWPL')"><img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1eEtwPx2ixS_BsZanWq4M6zkG_fYBHWPL" alt="Our moment"></div>
-          <div class="polaroid-card fade-in-card" onclick="openModal('https://drive.google.com/thumbnail?sz=w1000&id=174U0_iER3-Lo1lnM2J_6Hcvt8Uu2u-K5')"><img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=174U0_iER3-Lo1lnM2J_6Hcvt8Uu2u-K5" alt="Our moment"></div>
-          <div class="polaroid-card fade-in-card" onclick="openModal('https://drive.google.com/thumbnail?sz=w1000&id=1JaKumM4fkZgjt2Fljq3vDPWXb1Nx_PgG')"><img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1JaKumM4fkZgjt2Fljq3vDPWXb1Nx_PgG" alt="Our moment"></div>
-          <div class="polaroid-card fade-in-card" onclick="openModal('https://drive.google.com/thumbnail?sz=w1000&id=1iwtLBQSIOHiRri-224Byqje0MbqId9FU')"><img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1iwtLBQSIOHiRri-224Byqje0MbqId9FU" alt="Our moment"></div>
-          <div class="polaroid-card fade-in-card" onclick="openModal('https://drive.google.com/thumbnail?sz=w1000&id=1Lz-bYkJzQOaJy3RtcXoj5zdsPjx-DNFH')"><img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1Lz-bYkJzQOaJy3RtcXoj5zdsPjx-DNFH" alt="Our moment"></div>
-          <div class="polaroid-card fade-in-card" onclick="openModal('https://drive.google.com/thumbnail?sz=w1000&id=1yu3DRhaVseptdu0kGeIm-gz4hJrRoEJV')"><img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1yu3DRhaVseptdu0kGeIm-gz4hJrRoEJV" alt="Our moment"></div>
-          <div class="polaroid-card fade-in-card" onclick="openModal('https://drive.google.com/thumbnail?sz=w1000&id=1sYzeu8hcEX3z1F6mxqPMbZ0neKOomnIm')"><img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1sYzeu8hcEX3z1F6mxqPMbZ0neKOomnIm" alt="Our moment"></div>
-          <div class="polaroid-card fade-in-card" onclick="openModal('https://drive.google.com/thumbnail?sz=w1000&id=1ruZ8atpm00TFszuwVEPiata1j2bupwSs')"><img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1ruZ8atpm00TFszuwVEPiata1j2bupwSs" alt="Our moment"></div>
-          <div class="polaroid-card fade-in-card" onclick="openModal('https://drive.google.com/thumbnail?sz=w1000&id=15GQYUv8lZEKJz7gCqe3CriMAMk2nk8TI')"><img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1ruZ8atpm00TFszuwVEPiata1j2bupwSs" alt="Our moment"></div>
-          <div class="polaroid-card fade-in-card" onclick="openModal('https://drive.google.com/thumbnail?sz=w1000&id=1xuyhuvbTPfMpiAlIBHPMQMDwNbfWId0J')"><img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1ruZ8atpm00TFszuwVEPiata1j2bupwSs" alt="Our moment"></div>
+        <p class="text-center text-white/80 font-cormorant italic mb-8 -mt-8">Scratch the silver hearts to reveal our memories ✨</p>
+        
+        <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-14 px-4">
+          <div class="polaroid-card fade-in-card" data-revealed="false">
+            <div class="polaroid-container">
+              <canvas class="scratch-canvas"></canvas>
+              <img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1LSibvWPXnrm1ez5NOHdj4W6wD996Fg8r" alt="Our moment" onclick="handleCardClick(this)">
+            </div>
+          </div>
+          <div class="polaroid-card fade-in-card" data-revealed="false">
+            <div class="polaroid-container">
+              <canvas class="scratch-canvas"></canvas>
+              <img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1ZJ-Oa3txN-rCEAhayFPnKUBa-Or-Crly" alt="Our moment" onclick="handleCardClick(this)">
+            </div>
+          </div>
+          <div class="polaroid-card fade-in-card" data-revealed="false">
+            <div class="polaroid-container">
+              <canvas class="scratch-canvas"></canvas>
+              <img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1__SjpqUEFpcKphr0BSB-QI7jOkneTw6L" alt="Our moment" onclick="handleCardClick(this)">
+            </div>
+          </div>
+          <div class="polaroid-card fade-in-card" data-revealed="false">
+            <div class="polaroid-container">
+              <canvas class="scratch-canvas"></canvas>
+              <img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1eEtwPx2ixS_BsZanWq4M6zkG_fYBHWPL" alt="Our moment" onclick="handleCardClick(this)">
+            </div>
+          </div>
+          <div class="polaroid-card fade-in-card" data-revealed="false">
+            <div class="polaroid-container">
+              <canvas class="scratch-canvas"></canvas>
+              <img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=174U0_iER3-Lo1lnM2J_6Hcvt8Uu2u-K5" alt="Our moment" onclick="handleCardClick(this)">
+            </div>
+          </div>
+          <div class="polaroid-card fade-in-card" data-revealed="false">
+            <div class="polaroid-container">
+              <canvas class="scratch-canvas"></canvas>
+              <img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1JaKumM4fkZgjt2Fljq3vDPWXb1Nx_PgG" alt="Our moment" onclick="handleCardClick(this)">
+            </div>
+          </div>
+          <div class="polaroid-card fade-in-card" data-revealed="false">
+            <div class="polaroid-container">
+              <canvas class="scratch-canvas"></canvas>
+              <img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1iwtLBQSIOHiRri-224Byqje0MbqId9FU" alt="Our moment" onclick="handleCardClick(this)">
+            </div>
+          </div>
+          <div class="polaroid-card fade-in-card" data-revealed="false">
+            <div class="polaroid-container">
+              <canvas class="scratch-canvas"></canvas>
+              <img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1Lz-bYkJzQOaJy3RtcXoj5zdsPjx-DNFH" alt="Our moment" onclick="handleCardClick(this)">
+            </div>
+          </div>
+          <div class="polaroid-card fade-in-card" data-revealed="false">
+            <div class="polaroid-container">
+              <canvas class="scratch-canvas"></canvas>
+              <img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1yu3DRhaVseptdu0kGeIm-gz4hJrRoEJV" alt="Our moment" onclick="handleCardClick(this)">
+            </div>
+          </div>
+          <div class="polaroid-card fade-in-card" data-revealed="false">
+            <div class="polaroid-container">
+              <canvas class="scratch-canvas"></canvas>
+              <img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1sYzeu8hcEX3z1F6mxqPMbZ0neKOomnIm" alt="Our moment" onclick="handleCardClick(this)">
+            </div>
+          </div>
+          <div class="polaroid-card fade-in-card" data-revealed="false">
+            <div class="polaroid-container">
+              <canvas class="scratch-canvas"></canvas>
+              <img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1ruZ8atpm00TFszuwVEPiata1j2bupwSs" alt="Our moment" onclick="handleCardClick(this)">
+            </div>
+          </div>
+          <div class="polaroid-card fade-in-card" data-revealed="false">
+            <div class="polaroid-container">
+              <canvas class="scratch-canvas"></canvas>
+              <img loading="lazy" decoding="async" src="https://drive.google.com/thumbnail?sz=w1000&id=1ruZ8atpm00TFszuwVEPiata1j2bupwSs" alt="Our moment" onclick="handleCardClick(this)">
+            </div>
+          </div>
         </div>
-      </section>
+     </section>
 
     <section class="py-16 px-6 text-center">
       <h2 class="text-4xl font-playfair text-white mb-8">Where are we taking our next memory, Koky? 🗺️</h2>
